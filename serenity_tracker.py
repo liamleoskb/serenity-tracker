@@ -25,7 +25,7 @@ APIFY_ACTOR_ID = os.environ.get("APIFY_ACTOR_ID", "")  # e.g. "someuser~their-ac
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
 TARGET_HANDLE = os.environ.get("TARGET_HANDLE", "aleabitoreddit")
-MAX_POSTS = int(os.environ.get("MAX_POSTS", "50"))
+MAX_POSTS = int(os.environ.get("MAX_POSTS", "100"))
 
 HISTORY_PATH = "data/history.json"
 DASHBOARD_PATH = "docs/index.html"
