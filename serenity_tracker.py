@@ -86,8 +86,11 @@ def fetch_posts():
     print(f"Fetching up to {MAX_POSTS} posts from @{TARGET_HANDLE} via Apify...")
     try:
         items = http_json(url, actor_input)
+    except urllib.error.HTTPError as e:
+        fail(f"Apify {e.code}: {e.read().decode()[:800]}")
     except Exception as e:
         fail(f"Apify request failed: {e}")
+
 
     if not isinstance(items, list):
         fail(f"Unexpected Apify response (not a list): {str(items)[:300]}")
