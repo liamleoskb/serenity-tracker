@@ -1,13 +1,13 @@
-# Place this file at: .github/workflows/daily.yml  (exact path matters!)
-name: Daily Serenity Tracker
+name: Daily Market Voices Tracker
 
 on:
   schedule:
-    - cron: "30 22 * * *"   # 22:30 UTC = 07:30 in Korea, every day
-  workflow_dispatch: {}      # lets you press "Run workflow" manually
+    - cron: "30 22 * * *"   # 22:30 UTC = 07:30 KST daily
+                             # change to "30 22 */2 * *" to run every 2 days
+  workflow_dispatch: {}
 
 permissions:
-  contents: write            # allows the workflow to save results back to the repo
+  contents: write
 
 jobs:
   track:
@@ -26,7 +26,8 @@ jobs:
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
           APIFY_ACTOR_ID: ${{ secrets.APIFY_ACTOR_ID }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          TARGET_HANDLE: aleabitoreddit
+          TARGET_HANDLES: aleabitoreddit,gmpnavi,NURadu_,TheObserverLee,Alisvolatprop12
+          MAX_POSTS: "100"
         run: python serenity_tracker.py
 
       - name: Save results back to the repository
