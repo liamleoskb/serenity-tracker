@@ -1,0 +1,49 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Serenity Tracker</title>
+<style>
+:root { --bg:#101418; --panel:#1a2027; --ink:#e8edf2; --dim:#8a97a5;
+        --bull:#3ecf8e; --bear:#ff6b6b; --line:#2a323c; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink);
+       font:16px/1.55 "Avenir Next","Segoe UI",sans-serif; padding:20px; }
+header { border-left:4px solid var(--bull); padding-left:14px; margin-bottom:24px; }
+h1 { margin:0; font-size:1.5rem; letter-spacing:.02em; }
+.sub { color:var(--dim); font-size:.85rem; }
+.tab { background:none; border:1px solid var(--line); color:var(--dim);
+        padding:8px 16px; border-radius:20px; margin-right:8px; font-size:.9rem; }
+.tab.active { color:var(--ink); border-color:var(--bull); }
+table { width:100%; border-collapse:collapse; margin-top:16px; display:none; }
+table.active { display:table; }
+th,td { text-align:left; padding:10px 8px; border-bottom:1px solid var(--line);
+         font-size:.92rem; }
+th { color:var(--dim); font-weight:600; font-size:.78rem;
+     text-transform:uppercase; letter-spacing:.06em; }
+.tk { font-weight:700; }
+.bull,.bullish { color:var(--bull); } .bear,.bearish { color:var(--bear); }
+.neutral { color:var(--dim); }
+h2 { margin-top:36px; font-size:1.05rem; color:var(--dim);
+     text-transform:uppercase; letter-spacing:.08em; }
+.card { background:var(--panel); border:1px solid var(--line);
+         border-radius:10px; padding:14px 16px; margin-top:12px; }
+.card-top { display:flex; justify-content:space-between; margin-bottom:6px; }
+.badge { font-size:.75rem; padding:2px 10px; border-radius:12px;
+          border:1px solid currentColor; }
+.card p { margin:4px 0; font-size:.92rem; }
+.meta { color:var(--dim); font-size:.8rem; }
+a { color:var(--bull); }
+footer { margin-top:40px; color:var(--dim); font-size:.78rem; }
+</style></head><body>
+<header><h1>Serenity Tracker</h1>
+<div class="sub">Public posts of @aleabitoreddit, auto-classified daily · updated 2026-08-25 08:16 UTC</div></header>
+<div><button class='tab active' onclick="show(0)">7 days</button><button class='tab ' onclick="show(1)">30 days</button><button class='tab ' onclick="show(2)">90 days</button></div>
+<table class='period active' id='p0'><thead><tr><th>Ticker</th><th>Mentions</th><th>Bullish</th><th>Bearish</th><th>Neutral</th><th>Latest stance</th></tr></thead><tbody><tr><td colspan='6'>No mentions in this period yet.</td></tr></tbody></table><table class='period ' id='p1'><thead><tr><th>Ticker</th><th>Mentions</th><th>Bullish</th><th>Bearish</th><th>Neutral</th><th>Latest stance</th></tr></thead><tbody><tr><td colspan='6'>No mentions in this period yet.</td></tr></tbody></table><table class='period ' id='p2'><thead><tr><th>Ticker</th><th>Mentions</th><th>Bullish</th><th>Bearish</th><th>Neutral</th><th>Latest stance</th></tr></thead><tbody><tr><td colspan='6'>No mentions in this period yet.</td></tr></tbody></table>
+<h2>Recent mentions</h2>
+<p>Nothing recorded yet — check back after the first successful run.</p>
+<footer>Automated research interface for public posts. Not affiliated with the account owner. Not investment advice.</footer>
+<script>
+function show(n) {
+  document.querySelectorAll('.period').forEach((t,i)=>t.classList.toggle('active',i===n));
+  document.querySelectorAll('.tab').forEach((b,i)=>b.classList.toggle('active',i===n));
+}
+</script></body></html>
