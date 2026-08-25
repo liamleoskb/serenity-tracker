@@ -1,11 +1,10 @@
 """
-Multi-Account X Tracker
------------------------
-Runs daily via GitHub Actions:
-  1. Fetches recent public posts from several X accounts (Apify / Scweet)
-  2. Asks Gemini (free tier) to extract stock tickers + stance
-  3. Appends to data/history.json
-  4. Rebuilds docs/index.html (your dashboard)
+Multi-Account X Tracker (v3 — diagnostic build)
+-----------------------------------------------
+Same pipeline as before, but fetch_posts() now:
+  * prints the raw Apify response shape (how many items, what fields)
+  * tries several input formats until one returns data
+  * reports exactly which format worked, so we can lock it in later
 
 Secrets required: APIFY_TOKEN, APIFY_ACTOR_ID, GEMINI_API_KEY
 """
@@ -35,6 +34,9 @@ MAX_POSTS = int(os.environ.get("MAX_POSTS", "100"))  # actor minimum is 100
 HISTORY_PATH = "data/history.json"
 DASHBOARD_PATH = "docs/index.html"
 
+# Set to "1" in the workflow to print raw API responses for debugging.
+DEBUG = os.environ.get("DEBUG", "1") == "1"
+
 
 def fail(msg):
     print(f"ERROR: {msg}")
@@ -55,57 +57,166 @@ def http_json(url, payload=None, timeout=300):
 
 # ----------------------------- step 1: fetch posts -----------------------------
 
+def input_variants(handle):
+    """
+    Different actors want different field names. We try these in order
+    and keep the first one that actually returns items.
+    """
+    return [
+        ("search_query only", {
+            "search_query": f"from:{handle}",
+            "search_sort": "Latest",
+            "source_mode": "auto",
+            "tweet_type": "all",
+            "max_items": MAX_POSTS,
+        }),
+        ("profile_urls (@handle)", {
+            "profile_urls": [f"@{handle}"],
+            "search_sort": "Latest",
+            "source_mode": "auto",
+            "tweet_type": "all",
+            "max_items": MAX_POSTS,
+        }),
+        ("profile_urls (full URL)", {
+            "profile_urls": [f"https://x.com/{handle}"],
+            "search_sort": "Latest",
+            "source_mode": "auto",
+            "tweet_type": "all",
+            "max_items": MAX_POSTS,
+        }),
+        ("both fields", {
+            "profile_urls": [f"https://x.com/{handle}"],
+            "search_query": f"from:{handle}",
+            "search_sort": "Latest",
+            "source_mode": "auto",
+            "tweet_type": "all",
+            "max_items": MAX_POSTS,
+        }),
+    ]
+
+
+def extract_text(item):
+    """Pull post text out of whatever field name the actor used."""
+    for key in ("text", "full_text", "fullText", "tweet", "content",
+                "tweet_text", "tweetText", "body", "rawContent", "renderedContent"):
+        v = item.get(key)
+        if isinstance(v, str) and v.strip():
+            return v.strip()
+    return ""
+
+
+def extract_url(item):
+    for key in ("url", "tweetUrl", "tweet_url", "link", "permalink", "twitterUrl"):
+        v = item.get(key)
+        if isinstance(v, str) and v.strip():
+            return v.strip()
+    # Some actors give only an ID — build the URL from it.
+    tid = item.get("id") or item.get("id_str") or item.get("tweet_id") or item.get("conversation_id")
+    user = item.get("username") or item.get("userName") or item.get("screen_name")
+    if tid and user:
+        return f"https://x.com/{user}/status/{tid}"
+    if tid:
+        return f"https://x.com/i/status/{tid}"
+    return ""
+
+
+def extract_date(item):
+    for key in ("created_at", "createdAt", "date", "timestamp", "time", "post_date"):
+        v = item.get(key)
+        if v:
+            return str(v)
+    return ""
+
+
+def normalize(items, handle):
+    """Turn raw actor output into our own post format."""
+    posts = []
+    for it in items:
+        if not isinstance(it, dict):
+            continue
+        text = extract_text(it)
+        if not text:
+            continue
+        posts.append({
+            "text": text,
+            "url": extract_url(it),
+            "date": extract_date(it),
+            "author": handle,
+        })
+    return posts
+
+
+def run_actor(url, actor_input):
+    """Call Apify. Returns (items, error_string)."""
+    try:
+        items = http_json(url, actor_input)
+        return items, None
+    except urllib.error.HTTPError as e:
+        try:
+            body = e.read().decode()[:300]
+        except Exception:
+            body = ""
+        return None, f"HTTP {e.code} {body}"
+    except Exception as e:
+        return None, str(e)
+
+
 def fetch_posts():
-    """Run the Apify actor once per handle. One bad handle won't kill the run."""
     if not APIFY_TOKEN or not APIFY_ACTOR_ID:
         fail("APIFY_TOKEN or APIFY_ACTOR_ID is missing (check GitHub Secrets).")
 
     url = (f"https://api.apify.com/v2/acts/{APIFY_ACTOR_ID}"
            f"/run-sync-get-dataset-items?token={APIFY_TOKEN}")
 
-    posts = []
+    all_posts = []
+    working_format = None   # once one format works, reuse it for the rest
+
     for handle in TARGET_HANDLES:
-        print(f"Fetching up to {MAX_POSTS} posts from @{handle}...")
-        actor_input = {
-            "search_query": f"from:{handle}",
-            "search_sort": "Latest",
-            "source_mode": "auto",
-            "tweet_type": "all",
-            "max_items": MAX_POSTS,
-        }
-        try:
-            items = http_json(url, actor_input)
-        except urllib.error.HTTPError as e:
-            print(f"  skipped @{handle}: HTTP {e.code} {e.read().decode()[:300]}")
-            continue
-        except Exception as e:
-            print(f"  skipped @{handle}: {e}")
-            continue
+        print(f"\n=== @{handle} ===")
+        variants = input_variants(handle)
+        if working_format:
+            # put the known-good format first
+            variants.sort(key=lambda v: v[0] != working_format)
 
-        if not isinstance(items, list):
-            print(f"  skipped @{handle}: unexpected response")
-            continue
+        got = []
+        for label, actor_input in variants:
+            print(f"  trying input format: {label}")
+            items, err = run_actor(url, actor_input)
 
-        count = 0
-        for it in items:
-            if not isinstance(it, dict):
+            if err:
+                print(f"    failed: {err}")
                 continue
-            text = (it.get("text") or it.get("full_text")
-                    or it.get("tweet") or it.get("content") or "")
-            if not text.strip():
+            if not isinstance(items, list):
+                print(f"    unexpected response type: {type(items).__name__} "
+                      f"{str(items)[:200]}")
                 continue
-            posts.append({
-                "text": text.strip(),
-                "url": it.get("url") or it.get("tweetUrl") or it.get("link") or "",
-                "date": str(it.get("created_at") or it.get("createdAt")
-                            or it.get("date") or it.get("timestamp") or ""),
-                "author": handle,
-            })
-            count += 1
-        print(f"  got {count} posts from @{handle}")
 
-    print(f"Total posts collected: {len(posts)}")
-    return posts
+            print(f"    raw items returned: {len(items)}")
+            if DEBUG and items:
+                first = items[0] if isinstance(items[0], dict) else {}
+                print(f"    first item field names: {sorted(first.keys())[:25]}")
+                print(f"    first item sample: {json.dumps(first, ensure_ascii=False)[:400]}")
+
+            posts = normalize(items, handle)
+            print(f"    usable posts after parsing: {len(posts)}")
+
+            if posts:
+                got = posts
+                working_format = label
+                print(f"    ✓ format '{label}' works")
+                break
+            elif items:
+                print("    ! items returned but no text field recognized — "
+                      "see field names above")
+
+        if not got:
+            print(f"  no posts obtained for @{handle}")
+        all_posts.extend(got)
+
+    print(f"\nTotal posts collected: {len(all_posts)}")
+    if working_format:
+        print(f"Working input format: {working_format}")
+    return all_posts
 
 
 # ----------------------------- step 2: classify -----------------------------
@@ -147,7 +258,6 @@ def classify_batch(batch, offset):
 
 
 def classify_posts(posts):
-    """Classify in batches of 25 so prompts stay small and reliable."""
     if not GEMINI_API_KEY:
         fail("GEMINI_API_KEY is missing (check GitHub Secrets).")
     if not posts:
@@ -205,8 +315,9 @@ def merge(history, new_rows):
     added = 0
     now = datetime.now(timezone.utc).isoformat()
     for r in new_rows:
-        key = (r["post_url"], r["ticker"])
-        if r["post_url"] and key not in seen:
+        # fall back to text-based key if the actor gave no URL
+        key = (r["post_url"] or r["post_text"][:60], r["ticker"])
+        if key not in seen:
             r["recorded_at"] = now
             history.append(r)
             seen.add(key)
@@ -278,7 +389,7 @@ def build_dashboard(history):
         + (f" · <a href='{r['post_url']}'>original post</a>" if r.get("post_url") else "")
         + "</div></div>"
         for r in recent
-    ) or "<p>Nothing recorded yet — check back after the first successful run.</p>"
+    ) or "<p>Nothing recorded yet — check the Actions log for what the fetch returned.</p>"
 
     watched = ", ".join("@" + h for h in TARGET_HANDLES)
     updated = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
@@ -294,6 +405,7 @@ body {{ margin:0; background:var(--bg); color:var(--ink); padding:20px;
 header {{ border-left:4px solid var(--bull); padding-left:14px; margin-bottom:22px; }}
 h1 {{ margin:0; font-size:1.45rem; }}
 .sub {{ color:var(--dim); font-size:.82rem; margin-top:4px; }}
+nav a {{ font-size:.85rem; }}
 .tab {{ background:none; border:1px solid var(--line); color:var(--dim);
   padding:8px 16px; border-radius:20px; margin:0 8px 8px 0; font-size:.9rem; }}
 .tab.active {{ color:var(--ink); border-color:var(--bull); }}
@@ -317,7 +429,8 @@ footer {{ margin-top:38px; color:var(--dim); font-size:.76rem; line-height:1.6; 
 </style></head><body>
 <header><h1>Market Voices Tracker</h1>
 <div class="sub">Watching {watched} · updated {updated}</div></header>
-<div>{''.join(tabs)}</div>
+<nav><a href="analysis.html">Consensus &amp; track record →</a></nav>
+<div style="margin-top:16px">{''.join(tabs)}</div>
 {''.join(tables)}
 <h2>Recent mentions</h2>
 {feed}
