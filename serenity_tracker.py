@@ -65,13 +65,22 @@ def fetch_posts():
     # These are common ones; if your chosen actor uses different names,
     # check its "Input" tab on Apify and adjust here.
     actor_input = {
-        "handle": TARGET_HANDLE,
-        "handles": [TARGET_HANDLE],
-        "username": TARGET_HANDLE,
-        "twitterHandles": [TARGET_HANDLE],
-        "maxItems": MAX_POSTS,
-        "maxTweets": MAX_POSTS,
-        "max_posts": MAX_POSTS,
+        "profile_urls": [f"@{TARGET_HANDLE}"],
+        "search_query": f"from:{TARGET_HANDLE}",
+        "search_sort": "Latest",
+        "source_mode": "auto",
+        "tweet_type": "all",
+        "max_items": MAX_POSTS,
+        "min_likes": 0,
+        "min_replies": 0,
+        "min_retweets": 0,
+        "blue_verified_only": False,
+        "verified_only": False,
+        "has_hashtags": False,
+        "has_images": False,
+        "has_links": False,
+        "has_mentions": False,
+        "has_videos": False,
     }
 
     print(f"Fetching up to {MAX_POSTS} posts from @{TARGET_HANDLE} via Apify...")
