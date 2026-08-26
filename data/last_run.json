@@ -1,9 +1,11 @@
 {
- "when": "2026-08-26T02:53:11.324958+00:00",
+ "when": "2026-08-26T03:15:24.468856+00:00",
  "posts_fetched": 100,
- "mentions_added": 0,
+ "mentions_added": 23,
+ "spent_total": 0.306,
+ "budget": 1.7,
  "notes": [
-  "Fetched 100 posts · est. ~$0.306",
-  "Posts were fetched but contained no stock tickers."
+  "Fetched 100 posts · est. $0.306",
+  "Cap reached and @Alisvolatprop12 used 61/100 of it — other accounts under-sampled."
  ]
 }

@@ -1,1 +1,232 @@
-[]
+[
+ {
+  "ticker": "SMTC",
+  "stance": "neutral",
+  "note": "Acknowledging misspelling of company name",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2092411208100085775",
+  "post_date": "Wed Aug 26 00:38:01 +0000 2026",
+  "post_text": "@AheadOfTmrw I also misspelled Semtech 2 times, mistakes happen",
+  "recorded_at": "2026-08-26T03:15:24.468086+00:00"
+ },
+ {
+  "ticker": "SMTC",
+  "stance": "bullish",
+  "note": "Strong demand, pricing power, and progress in optical products",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2092408620277457255",
+  "post_date": "Wed Aug 26 00:27:44 +0000 2026",
+  "post_text": "All right back to $SMTC movie: \"The bottleneck go Brrr\":\n\nMy favorite quote was: \"availability currently matters more than pricing\". \n\nIn the current market for optical products. \n\n- No near-term erosion is expected on booked optical orders, which signals they're passing cost inc",
+  "recorded_at": "2026-08-26T03:15:24.468086+00:00"
+ },
+ {
+  "ticker": "NVDA",
+  "stance": "bullish",
+  "note": "Positive news regarding Groq 3 LPX rack mass production complementing Vera Rubin platform",
+  "author": "NURadu_",
+  "post_url": "https://x.com/NURadu_/status/2092372933297754602",
+  "post_date": "Tue Aug 25 22:05:56 +0000 2026",
+  "post_text": "엔비디아 호재, 최강 AI 추론 랙 Groq 3 LPX 양산, 폭스콘 수혜\n\n•엔비디아가 Groq 3 LPU 칩 256개를 탑재한 Groq 3 LPX 랙의 전면 양산을 시작했음. 해당 랙은 Vera CPU 및 Rubin GPU와 함께 클라우드 업체 Nebius에 배치되며, 올해 말 가동될 예정임. 폭스콘(2317)이 관련 랙의 최대 조립업체로 거론되며 출하 증가가 기대됨.\n\n•Groq 3 LPX는 GPU를 대체하기 위한 제품이 아니라 Vera Rubin 플랫폼을 보완해 저지연 추론과 초고속 토큰 ",
+  "recorded_at": "2026-08-26T03:15:24.468086+00:00"
+ },
+ {
+  "ticker": "2317.TW",
+  "stance": "bullish",
+  "note": "Beneficiary expected to see increased shipments as primary rack assembler",
+  "author": "NURadu_",
+  "post_url": "https://x.com/NURadu_/status/2092372933297754602",
+  "post_date": "Tue Aug 25 22:05:56 +0000 2026",
+  "post_text": "엔비디아 호재, 최강 AI 추론 랙 Groq 3 LPX 양산, 폭스콘 수혜\n\n•엔비디아가 Groq 3 LPU 칩 256개를 탑재한 Groq 3 LPX 랙의 전면 양산을 시작했음. 해당 랙은 Vera CPU 및 Rubin GPU와 함께 클라우드 업체 Nebius에 배치되며, 올해 말 가동될 예정임. 폭스콘(2317)이 관련 랙의 최대 조립업체로 거론되며 출하 증가가 기대됨.\n\n•Groq 3 LPX는 GPU를 대체하기 위한 제품이 아니라 Vera Rubin 플랫폼을 보완해 저지연 추론과 초고속 토큰 ",
+  "recorded_at": "2026-08-26T03:15:24.468086+00:00"
+ },
+ {
+  "ticker": "005930.KS",
+  "stance": "neutral",
+  "note": "Factual mention of Samsung producing SRAM for Groq chips",
+  "author": "NURadu_",
+  "post_url": "https://x.com/NURadu_/status/2092372933297754602",
+  "post_date": "Tue Aug 25 22:05:56 +0000 2026",
+  "post_text": "엔비디아 호재, 최강 AI 추론 랙 Groq 3 LPX 양산, 폭스콘 수혜\n\n•엔비디아가 Groq 3 LPU 칩 256개를 탑재한 Groq 3 LPX 랙의 전면 양산을 시작했음. 해당 랙은 Vera CPU 및 Rubin GPU와 함께 클라우드 업체 Nebius에 배치되며, 올해 말 가동될 예정임. 폭스콘(2317)이 관련 랙의 최대 조립업체로 거론되며 출하 증가가 기대됨.\n\n•Groq 3 LPX는 GPU를 대체하기 위한 제품이 아니라 Vera Rubin 플랫폼을 보완해 저지연 추론과 초고속 토큰 ",
+  "recorded_at": "2026-08-26T03:15:24.468086+00:00"
+ },
+ {
+  "ticker": "2330.TW",
+  "stance": "neutral",
+  "note": "Factual mention of TSMC producing GPUs for Groq chips",
+  "author": "NURadu_",
+  "post_url": "https://x.com/NURadu_/status/2092372933297754602",
+  "post_date": "Tue Aug 25 22:05:56 +0000 2026",
+  "post_text": "엔비디아 호재, 최강 AI 추론 랙 Groq 3 LPX 양산, 폭스콘 수혜\n\n•엔비디아가 Groq 3 LPU 칩 256개를 탑재한 Groq 3 LPX 랙의 전면 양산을 시작했음. 해당 랙은 Vera CPU 및 Rubin GPU와 함께 클라우드 업체 Nebius에 배치되며, 올해 말 가동될 예정임. 폭스콘(2317)이 관련 랙의 최대 조립업체로 거론되며 출하 증가가 기대됨.\n\n•Groq 3 LPX는 GPU를 대체하기 위한 제품이 아니라 Vera Rubin 플랫폼을 보완해 저지연 추론과 초고속 토큰 ",
+  "recorded_at": "2026-08-26T03:15:24.468086+00:00"
+ },
+ {
+  "ticker": "SMTC",
+  "stance": "neutral",
+  "note": "Author lost interest in earnings report to research another stock",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2092354322432684098",
+  "post_date": "Tue Aug 25 20:51:59 +0000 2026",
+  "post_text": "Lost interest in $SMTC and every other earnings report today after finding a memory name way too interesting not to research...",
+  "recorded_at": "2026-08-26T03:15:24.468086+00:00"
+ },
+ {
+  "ticker": "GFS",
+  "stance": "bullish",
+  "note": "Sees long-term optical rerating story with low forward P/E",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2092282362289926612",
+  "post_date": "Tue Aug 25 16:06:02 +0000 2026",
+  "post_text": "@jusmentrades uhh, pretty sure $GFS is a 2027-2028 type optical rerating story... \n\nfyi they're like 11.5 fwd p/e ending 2028 and 7.5x longer term, so idk about betting on a 1 1/2 month timeframe in 2026. https://t.co/V9i8BNhlyR",
+  "recorded_at": "2026-08-26T03:15:24.468086+00:00"
+ },
+ {
+  "ticker": "USAR",
+  "stance": "bullish",
+  "note": "Identifies raw materials as the key bottleneck play",
+  "author": "NURadu_",
+  "post_url": "https://x.com/NURadu_/status/2092271280674537603",
+  "post_date": "Tue Aug 25 15:22:00 +0000 2026",
+  "post_text": "병목은 원자재다..\n이썩는다 썩어 \n$USAR $UUUU $NB https://t.co/vcXP8NG8w0",
+  "recorded_at": "2026-08-26T03:15:24.468086+00:00"
+ },
+ {
+  "ticker": "UUUU",
+  "stance": "bullish",
+  "note": "Identifies raw materials as the key bottleneck play",
+  "author": "NURadu_",
+  "post_url": "https://x.com/NURadu_/status/2092271280674537603",
+  "post_date": "Tue Aug 25 15:22:00 +0000 2026",
+  "post_text": "병목은 원자재다..\n이썩는다 썩어 \n$USAR $UUUU $NB https://t.co/vcXP8NG8w0",
+  "recorded_at": "2026-08-26T03:15:24.468086+00:00"
+ },
+ {
+  "ticker": "NB",
+  "stance": "bullish",
+  "note": "Identifies raw materials as the key bottleneck play",
+  "author": "NURadu_",
+  "post_url": "https://x.com/NURadu_/status/2092271280674537603",
+  "post_date": "Tue Aug 25 15:22:00 +0000 2026",
+  "post_text": "병목은 원자재다..\n이썩는다 썩어 \n$USAR $UUUU $NB https://t.co/vcXP8NG8w0",
+  "recorded_at": "2026-08-26T03:15:24.468086+00:00"
+ },
+ {
+  "ticker": "005930.KS",
+  "stance": "bullish",
+  "note": "Highlights Samsung's resurgence and supply reliance from Nvidia and OpenAI",
+  "author": "Alisvolatprop12",
+  "post_url": "https://x.com/Alisvolatprop12/status/2092267977651749128",
+  "post_date": "Tue Aug 25 15:08:52 +0000 2026",
+  "post_text": "삼성의 재부각. 엔비디아는 Groq LPU를 삼파 4nm에 의존하고 OAI는 할라페뇨의 HBM을 삼성메모리로부터 의존합니다.",
+  "recorded_at": "2026-08-26T03:15:24.468086+00:00"
+ },
+ {
+  "ticker": "NVDA",
+  "stance": "neutral",
+  "note": "Describing Nvidia's supply chain dependence on Samsung Foundry",
+  "author": "Alisvolatprop12",
+  "post_url": "https://x.com/Alisvolatprop12/status/2092267977651749128",
+  "post_date": "Tue Aug 25 15:08:52 +0000 2026",
+  "post_text": "삼성의 재부각. 엔비디아는 Groq LPU를 삼파 4nm에 의존하고 OAI는 할라페뇨의 HBM을 삼성메모리로부터 의존합니다.",
+  "recorded_at": "2026-08-26T03:15:24.468086+00:00"
+ },
+ {
+  "ticker": "NVDA",
+  "stance": "bearish",
+  "note": "Author complains that Nvidia is stingy",
+  "author": "Alisvolatprop12",
+  "post_url": "https://x.com/Alisvolatprop12/status/2092236152325710001",
+  "post_date": "Tue Aug 25 13:02:25 +0000 2026",
+  "post_text": "@ksuniri 엔비디아가 참 짭니다.",
+  "recorded_at": "2026-08-26T03:15:24.468086+00:00"
+ },
+ {
+  "ticker": "108490.KQ",
+  "stance": "neutral",
+  "note": "Author quotes an official statement from Robotis executive",
+  "author": "Alisvolatprop12",
+  "post_url": "https://x.com/Alisvolatprop12/status/2092234992835596657",
+  "post_date": "Tue Aug 25 12:57:48 +0000 2026",
+  "post_text": "로보티즈 표윤석 부사장님 오피셜\n\n“(AI 사피엔스) 출시일은 미정입니다.”\n“(하지만) 올해는 넘기지 않을 계획이에요.” https://t.co/uZFeyLjAov",
+  "recorded_at": "2026-08-26T03:15:24.468086+00:00"
+ },
+ {
+  "ticker": "SIVE",
+  "stance": "bullish",
+  "note": "Believes share overhang is exhausted and expects price to recover post-catalyst",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2092226228942241975",
+  "post_date": "Tue Aug 25 12:22:59 +0000 2026",
+  "post_text": "Price took a hit largely due to Boostrap Europe converting 7% of shares outstanding and selling that into the Swedish market from ~July 3rd to maybe ~August 18th completion. \n\nThat happened alongside the overall AI sector drop + incorrect reports of CPO delays + short sellers wit",
+  "recorded_at": "2026-08-26T03:15:24.468086+00:00"
+ },
+ {
+  "ticker": "EROC",
+  "stance": "bullish",
+  "note": "Bought because company can buy time and will shine next year",
+  "author": "NURadu_",
+  "post_url": "https://x.com/NURadu_/status/2092194418342363550",
+  "post_date": "Tue Aug 25 10:16:35 +0000 2026",
+  "post_text": "$EROC \n$BRUN \n을 매수한 이유는 단순명쾌 합니다.\n이기업들은 돈으로 “시간” 을 살 수 있는 기업입니다.\n올해보다 내년에, 진짜 빛이 날 기업들이죠 \n당장 리스크도 꽤 있습니두.\n그것은 아티클에서 확인해보시길\n그리고 아직은 변동이 큰아이들이라 분할접근은 \n무조건입니두.",
+  "recorded_at": "2026-08-26T03:15:24.468086+00:00"
+ },
+ {
+  "ticker": "BRUN",
+  "stance": "bullish",
+  "note": "Bought because company can buy time and will shine next year",
+  "author": "NURadu_",
+  "post_url": "https://x.com/NURadu_/status/2092194418342363550",
+  "post_date": "Tue Aug 25 10:16:35 +0000 2026",
+  "post_text": "$EROC \n$BRUN \n을 매수한 이유는 단순명쾌 합니다.\n이기업들은 돈으로 “시간” 을 살 수 있는 기업입니다.\n올해보다 내년에, 진짜 빛이 날 기업들이죠 \n당장 리스크도 꽤 있습니두.\n그것은 아티클에서 확인해보시길\n그리고 아직은 변동이 큰아이들이라 분할접근은 \n무조건입니두.",
+  "recorded_at": "2026-08-26T03:15:24.468086+00:00"
+ },
+ {
+  "ticker": "SIVE",
+  "stance": "bullish",
+  "note": "Hoping for visibility on photonics co-development and contracts in upcoming earnings",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2092186856792506435",
+  "post_date": "Tue Aug 25 09:46:32 +0000 2026",
+  "post_text": "Lot of people were wondering about $SIVE earnings in 2 days. \n\nWhat I'm watching out for: \n\n1. I'm hoping for more visibility on photonics co-development/qualifications/contracts. \n\n-> $AAOI stated multiple customers approaching them for CPO lasers (but had to turn them away)\n-> ",
+  "recorded_at": "2026-08-26T03:15:24.468086+00:00"
+ },
+ {
+  "ticker": "AAOI",
+  "stance": "neutral",
+  "note": "Quoting company statement regarding CPO laser customers",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2092186856792506435",
+  "post_date": "Tue Aug 25 09:46:32 +0000 2026",
+  "post_text": "Lot of people were wondering about $SIVE earnings in 2 days. \n\nWhat I'm watching out for: \n\n1. I'm hoping for more visibility on photonics co-development/qualifications/contracts. \n\n-> $AAOI stated multiple customers approaching them for CPO lasers (but had to turn them away)\n-> ",
+  "recorded_at": "2026-08-26T03:15:24.468086+00:00"
+ },
+ {
+  "ticker": "MTSI",
+  "stance": "neutral",
+  "note": "Quoting company statement regarding CW capacity timeline",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2092186856792506435",
+  "post_date": "Tue Aug 25 09:46:32 +0000 2026",
+  "post_text": "Lot of people were wondering about $SIVE earnings in 2 days. \n\nWhat I'm watching out for: \n\n1. I'm hoping for more visibility on photonics co-development/qualifications/contracts. \n\n-> $AAOI stated multiple customers approaching them for CPO lasers (but had to turn them away)\n-> ",
+  "recorded_at": "2026-08-26T03:15:24.468086+00:00"
+ },
+ {
+  "ticker": "GFS",
+  "stance": "neutral",
+  "note": "Describing industry positioning relative to reference lasers",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2092186856792506435",
+  "post_date": "Tue Aug 25 09:46:32 +0000 2026",
+  "post_text": "Lot of people were wondering about $SIVE earnings in 2 days. \n\nWhat I'm watching out for: \n\n1. I'm hoping for more visibility on photonics co-development/qualifications/contracts. \n\n-> $AAOI stated multiple customers approaching them for CPO lasers (but had to turn them away)\n-> ",
+  "recorded_at": "2026-08-26T03:15:24.468086+00:00"
+ },
+ {
+  "ticker": "JBL",
+  "stance": "neutral",
+  "note": "Describing industry positioning relative to pluggables",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2092186856792506435",
+  "post_date": "Tue Aug 25 09:46:32 +0000 2026",
+  "post_text": "Lot of people were wondering about $SIVE earnings in 2 days. \n\nWhat I'm watching out for: \n\n1. I'm hoping for more visibility on photonics co-development/qualifications/contracts. \n\n-> $AAOI stated multiple customers approaching them for CPO lasers (but had to turn them away)\n-> ",
+  "recorded_at": "2026-08-26T03:15:24.468086+00:00"
+ }
+]
