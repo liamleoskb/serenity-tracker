@@ -1,26 +1,30 @@
 """
-Market Voices Tracker — final
-=============================
-Daily pipeline run by GitHub Actions:
-  1. ONE Apify (Scweet) run fetches recent posts from every tracked account
-  2. Gemini extracts stock tickers + stance from those posts
-  3. Results append to data/history.json (duplicates dropped)
-  4. docs/index.html is rebuilt
+Market Voices Tracker — budget-guarded build
+============================================
+Changes from the previous version:
+  * GEMINI_MODEL default is now gemini-3.6-flash (2.5-flash was retired)
+  * tracks 3 accounts (gmpnavi and TheObserverLee removed)
+  * LOOKBACK_DAYS default 1 — the smallest useful window
+  * NEW: a spend ledger in data/spend.json plus a pre-flight budget check.
+    The run is REFUSED before any Apify call if the remaining budget could
+    not absorb a worst-case run. This makes overspending structurally
+    impossible rather than merely unlikely.
+  * NEW: same-day guard — a second run on the same UTC date is refused
+    unless FORCE_RUN=1, so an accidental double-click cannot double-charge.
 
-Built against the actor's published spec (apify.com/altimis/scweet):
-  * max_items is GLOBAL per run  -> one run covers all handles
-  * free plan: $3.00/1,000 tweets + $0.006 run-start fee
-  * free guardrails: 1,000 tweets/day, 10 runs/day, 60s between runs
-  * unknown input keys are REJECTED -> only documented keys are sent
-  * output: id, text, handle, tweet_url, created_at, nested user/tweet
-  * created_at format: "Wed Dec 03 19:29:05 +0000 2025"
-  * zero-result runs trigger escalating cooldowns -> never auto-retry
+Cost model (Apify free plan, from the actor's published pricing):
+    $3.00 per 1,000 tweets + $0.006 run-start fee
+    worst case per run = 100 tweets = $0.306
+    observed for these 3 accounts ≈ 18 tweets/day ≈ $0.06/run
 
-Safety properties:
-  * exactly one Apify run per execution, no retries, no probing
-  * never raises: any failure still writes a dashboard explaining why
-  * history writes are atomic; a crash cannot corrupt the archive
-  * all user-derived text is HTML-escaped; only http(s) links are emitted
+IMPORTANT: the ledger records ESTIMATES, not Apify's actual billing.
+Check console.apify.com → Billing periodically and correct the ledger by
+editing data/spend.json if the figures drift.
+
+Built against apify.com/altimis/scweet:
+  max_items is global per run · free guardrails 1,000 tweets/day, 10 runs/day,
+  60s between runs · unknown input keys rejected · zero-result runs trigger
+  escalating cooldowns, so this script never auto-retries.
 
 Secrets: APIFY_TOKEN, APIFY_ACTOR_ID, GEMINI_API_KEY
 """
@@ -39,37 +43,34 @@ from datetime import datetime, timezone, timedelta
 APIFY_TOKEN = os.environ.get("APIFY_TOKEN", "").strip()
 APIFY_ACTOR_ID = os.environ.get("APIFY_ACTOR_ID", "altimis~scweet").strip()
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
-GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash").strip()
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.6-flash").strip()
 
 TARGET_HANDLES = [h.strip().lstrip("@") for h in os.environ.get(
-    "TARGET_HANDLES", "aleabitoreddit").split(",") if h.strip()]
+    "TARGET_HANDLES", "aleabitoreddit,NURadu_,Alisvolatprop12"
+).split(",") if h.strip()]
 
-# Documented minimum run size is 100; lower values are raised to 100 anyway.
-MAX_ITEMS = max(int(os.environ.get("MAX_ITEMS", "100")), 100)
+MAX_ITEMS = max(int(os.environ.get("MAX_ITEMS", "100")), 100)   # 100 is the floor
+LOOKBACK_DAYS = max(int(os.environ.get("LOOKBACK_DAYS", "1")), 1)
 
-# Days of history to request. With a daily run, 2 gives one day of overlap
-# so a skipped run loses nothing. Higher values re-fetch the same tweets and
-# may be billed again (cross-run dedup is not documented), so keep it small.
-LOOKBACK_DAYS = max(int(os.environ.get("LOOKBACK_DAYS", "2")), 1)
-
-# "Latest" = strict reverse-chronological. "Top" returns more but unordered.
 SEARCH_SORT = os.environ.get("SEARCH_SORT", "Latest").strip()
 if SEARCH_SORT not in ("Top", "Latest"):
     SEARCH_SORT = "Latest"
 
-# Retweets carry someone else's words under the tracked account's name, which
-# would corrupt both stance attribution and the track record. Excluded by
-# default. Documented alternatives: all, originals_only, replies_only,
-# retweets_only, exclude_replies, exclude_retweets.
 TWEET_TYPE = os.environ.get("TWEET_TYPE", "exclude_retweets").strip()
 
-BATCH_SIZE = 25            # posts per Gemini request
-COST_PER_1K = 3.00         # free-plan rate, used only for the log estimate
+# --- budget control ---
+BUDGET_USD = float(os.environ.get("BUDGET_USD", "1.70"))
+COST_PER_1K = 3.00          # free-plan tweet rate
 RUN_START_FEE = 0.006
+WORST_CASE_RUN = MAX_ITEMS / 1000 * COST_PER_1K + RUN_START_FEE   # $0.306
+FORCE_RUN = os.environ.get("FORCE_RUN", "").strip() == "1"
+
+BATCH_SIZE = 25
 
 HISTORY_PATH = "data/history.json"
-DASHBOARD_PATH = "docs/index.html"
+SPEND_PATH = "data/spend.json"
 STATUS_PATH = "data/last_run.json"
+DASHBOARD_PATH = "docs/index.html"
 
 VALID_STANCES = ("bullish", "bearish", "neutral")
 
@@ -90,21 +91,75 @@ def http_json(url, payload=None, timeout=600):
 
 
 def esc(s):
-    """HTML-escape any user-derived text."""
     return (str(s).replace("&", "&amp;").replace("<", "&lt;")
             .replace(">", "&gt;").replace('"', "&quot;"))
 
 
 def safe_url(u):
-    """Emit a link only for http(s). Blocks javascript: and data: schemes."""
     u = str(u or "").strip()
     return u if u.lower().startswith(("http://", "https://")) else ""
+
+
+# ============================ spend ledger ============================
+
+def load_spend():
+    """{'total': float, 'runs': [{'date','tweets','cost'}], 'budget': float}"""
+    if os.path.exists(SPEND_PATH):
+        try:
+            with open(SPEND_PATH, encoding="utf-8") as f:
+                d = json.load(f)
+            if isinstance(d, dict) and "total" in d:
+                d.setdefault("runs", [])
+                return d
+        except Exception as e:
+            log(f"WARNING: spend.json unreadable ({e}); treating spend as 0.")
+    return {"total": 0.0, "runs": [], "budget": BUDGET_USD}
+
+
+def save_spend(spend):
+    os.makedirs(os.path.dirname(SPEND_PATH), exist_ok=True)
+    spend["runs"] = spend.get("runs", [])[-60:]      # keep the last 60 runs
+    spend["budget"] = BUDGET_USD
+    tmp = SPEND_PATH + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(spend, f, ensure_ascii=False, indent=1)
+    os.replace(tmp, SPEND_PATH)
+
+
+def budget_check(spend):
+    """
+    Decide whether fetching is allowed. Returns (allowed, reason).
+    Reserves the worst-case run cost, so the budget can never be exceeded
+    even if every account suddenly posts to the cap.
+    """
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    spent = float(spend.get("total", 0.0))
+    remaining = BUDGET_USD - spent
+
+    log(f"Budget   : ${spent:.3f} spent of ${BUDGET_USD:.2f} "
+        f"· ${remaining:.3f} remaining")
+
+    if not FORCE_RUN:
+        for r in spend.get("runs", []):
+            if r.get("date") == today:
+                return False, (f"Already fetched today ({today}), costing "
+                               f"${r.get('cost', 0):.3f}. Skipping to avoid "
+                               f"double-charging. Set FORCE_RUN=1 to override.")
+
+    if remaining < WORST_CASE_RUN:
+        return False, (f"Budget guard: ${remaining:.3f} left, but a run could "
+                       f"cost up to ${WORST_CASE_RUN:.3f} in the worst case. "
+                       f"Refusing to fetch. Raise BUDGET_USD after your Apify "
+                       f"credit resets, or top up your account.")
+
+    runs_left = int(remaining // max(WORST_CASE_RUN, 0.001))
+    log(f"           at worst case, {runs_left} more run(s) fit in budget")
+    return True, ""
 
 
 # ============================ step 1: fetch ============================
 
 def build_actor_input():
-    """One search covering every handle. Documented keys only."""
     since = (datetime.now(timezone.utc) - timedelta(days=LOOKBACK_DAYS)
              ).strftime("%Y-%m-%d")
     return {
@@ -118,7 +173,6 @@ def build_actor_input():
 
 
 def extract_post(item):
-    """Map one Scweet dataset item to our format, or None if unusable."""
     if not isinstance(item, dict):
         return None
 
@@ -177,18 +231,24 @@ def extract_post(item):
     return {"text": text, "url": safe_url(url), "date": date, "author": author}
 
 
-def fetch_posts():
-    """ONE Apify run for all handles. Returns (posts, notes). Never raises."""
+def fetch_posts(spend):
+    """ONE Apify run, budget-gated. Returns (posts, notes, cost)."""
     if not APIFY_TOKEN or not APIFY_ACTOR_ID:
         log("ERROR: APIFY_TOKEN or APIFY_ACTOR_ID missing.")
-        return [], ["Apify credentials missing — check GitHub Secrets."]
+        return [], ["Apify credentials missing — check GitHub Secrets."], 0.0
+
+    allowed, reason = budget_check(spend)
+    if not allowed:
+        log(f"\nFETCH SKIPPED — {reason}")
+        return [], [reason], 0.0
 
     actor_input = build_actor_input()
-    log(f"Query    : {actor_input['search_query']}")
+    log(f"\nQuery    : {actor_input['search_query']}")
     log(f"Window   : since {actor_input['since']} ({LOOKBACK_DAYS}d) · "
         f"sort {actor_input['search_sort']} · {actor_input['tweet_type']}")
-    log(f"Cap      : {actor_input['max_items']} tweets TOTAL across all handles")
-    log("Apify use: 1 run (free plan allows 10/day)\n")
+    log(f"Cap      : {actor_input['max_items']} tweets TOTAL "
+        f"(worst case ${WORST_CASE_RUN:.3f})")
+    log("Apify use: 1 run\n")
 
     url = (f"https://api.apify.com/v2/acts/{APIFY_ACTOR_ID}"
            f"/run-sync-get-dataset-items?token={APIFY_TOKEN}")
@@ -201,34 +261,32 @@ def fetch_posts():
         except Exception:
             body = ""
         log(f"Apify HTTP {e.code}: {body}")
-        hint = ""
-        if e.code == 400:
-            hint = " (an input field was rejected — compare with the actor's Input tab)"
-        elif e.code in (401, 403):
-            hint = " (token invalid or the actor is not enabled on your account)"
-        return [], [f"Apify returned HTTP {e.code}{hint}"]
+        hint = {400: " (an input field was rejected)",
+                401: " (token invalid)",
+                403: " (actor not enabled on your account)"}.get(e.code, "")
+        # A failed run may still incur the start fee.
+        return [], [f"Apify returned HTTP {e.code}{hint}"], RUN_START_FEE
     except Exception as e:
         log(f"Apify request failed: {e}")
-        return [], [f"Apify request failed: {e}"]
+        return [], [f"Apify request failed: {e}"], RUN_START_FEE
 
     if not isinstance(items, list):
         log(f"Unexpected response: {type(items).__name__} {str(items)[:200]}")
-        return [], ["Apify returned an unexpected response shape."]
+        return [], ["Apify returned an unexpected response shape."], RUN_START_FEE
 
     log(f"Raw items returned: {len(items)}")
     if items and isinstance(items[0], dict):
         log(f"Field names: {sorted(items[0].keys())[:25]}")
 
     if not items:
-        log("\nZero tweets returned. Likely causes, in order:")
-        log("  1. Daily run limit — the run log on apify.com says")
-        log("     'Daily run limit reached (n/10)' when this is it.")
-        log("  2. A cooldown from earlier zero-result runs. The actor")
-        log("     lengthens these deliberately; re-running makes it worse.")
-        log("  3. Nothing posted inside the date window.")
-        log("  Check apify.com before running again.")
-        return [], ["No tweets returned — check the Apify run log for a daily "
-                    "run-limit or cooldown message before retrying."]
+        log("\nZero tweets returned. Likely causes:")
+        log("  1. Daily run limit — apify.com run log says "
+            "'Daily run limit reached (n/10)'.")
+        log("  2. A cooldown from earlier zero-result runs; re-running "
+            "lengthens it.")
+        log("  3. Nothing posted inside the window.")
+        return [], ["No tweets returned — check the Apify run log before "
+                    "retrying."], RUN_START_FEE
 
     posts, unattributed = [], 0
     for it in items:
@@ -250,34 +308,28 @@ def fetch_posts():
     if unattributed:
         log(f"  ({unattributed} posts carried no author field)")
 
-    notes = []
-    est = len(posts) / 1000 * COST_PER_1K + RUN_START_FEE
-    log(f"\nEstimated cost this run: ~${est:.3f} "
-        f"(free-plan rate ${COST_PER_1K:.2f}/1k + ${RUN_START_FEE} run fee)")
-    notes.append(f"Fetched {len(posts)} posts · est. ~${est:.3f}")
+    cost = len(posts) / 1000 * COST_PER_1K + RUN_START_FEE
+    log(f"\nEstimated cost this run: ${cost:.3f}")
+
+    notes = [f"Fetched {len(posts)} posts · est. ${cost:.3f}"]
 
     wanted = {h.lower() for h in TARGET_HANDLES}
-    seen = {a.lower() for a in per_author}
-    missing = wanted - seen
+    missing = wanted - {a.lower() for a in per_author}
     if missing:
         notes.append("Nothing in this window from: "
                      + ", ".join("@" + m for m in sorted(missing)))
 
-    # The cap is shared across handles: warn if one account may be crowding out
-    # the rest, which would otherwise fail silently.
-    if len(items) >= MAX_ITEMS and len(per_author) > 1:
-        top, count = max(per_author.items(), key=lambda kv: kv[1])
-        if count > MAX_ITEMS * 0.6:
-            msg = (f"Cap reached and @{top} used {count}/{len(posts)} of it — "
-                   f"other accounts may be under-sampled. Consider raising "
-                   f"MAX_ITEMS or shortening LOOKBACK_DAYS.")
-            log(f"\nWARNING: {msg}")
-            notes.append(msg)
-    elif len(items) >= MAX_ITEMS:
-        log(f"\nNote: hit the {MAX_ITEMS}-tweet cap; older posts in the window "
-            f"were not fetched.")
+    if len(items) >= MAX_ITEMS:
+        if len(per_author) > 1:
+            top, count = max(per_author.items(), key=lambda kv: kv[1])
+            if count > MAX_ITEMS * 0.6:
+                msg = (f"Cap reached and @{top} used {count}/{len(posts)} of it — "
+                       f"other accounts under-sampled.")
+                log(f"WARNING: {msg}")
+                notes.append(msg)
+        log(f"Note: hit the {MAX_ITEMS}-tweet cap; older posts not fetched.")
 
-    return posts, notes
+    return posts, notes, cost
 
 
 # ============================ step 2: classify ============================
@@ -301,7 +353,6 @@ Posts:
 
 
 def parse_gemini_json(raw):
-    """Recover the JSON array even if wrapped in fences or prose."""
     if not raw:
         return []
     cleaned = re.sub(r"```(?:json)?", "", raw).strip()
@@ -321,11 +372,11 @@ def parse_gemini_json(raw):
     return []
 
 
-def classify_batch(batch, offset):
+def classify_batch(batch, offset, model):
     numbered = "\n\n".join(
         f"[{i + offset}] {p['text'][:600]}" for i, p in enumerate(batch))
     url = (f"https://generativelanguage.googleapis.com/v1beta/models/"
-           f"{GEMINI_MODEL}:generateContent?key={GEMINI_API_KEY}")
+           f"{model}:generateContent?key={GEMINI_API_KEY}")
     payload = {"contents": [{"parts": [{"text": CLASSIFY_PROMPT + numbered}]}]}
 
     for attempt in (1, 2):
@@ -335,19 +386,34 @@ def classify_batch(batch, offset):
             return parse_gemini_json("".join(p.get("text", "") for p in parts))
         except urllib.error.HTTPError as e:
             try:
-                body = e.read().decode("utf-8", errors="replace")[:300]
+                body = e.read().decode("utf-8", errors="replace")[:400]
             except Exception:
                 body = ""
-            log(f"  Gemini HTTP {e.code}: {body}")
+            log(f"  Gemini HTTP {e.code}: {body[:200]}")
+            if e.code == 404:
+                # Google names the replacement model in the error text.
+                m = re.search(r"models/([\w.\-]+)", body.split("use", 1)[-1])
+                if m and m.group(1) != model:
+                    raise ModelRetired(m.group(1))
+                raise ModelRetired("")
             if e.code == 429 and attempt == 1:
                 log("  rate limited; waiting 20s for one retry")
                 time.sleep(20)
                 continue
             return []
+        except ModelRetired:
+            raise
         except Exception as e:
             log(f"  Gemini call failed: {e}")
             return []
     return []
+
+
+class ModelRetired(Exception):
+    """Raised when Gemini reports the model is gone, carrying the successor."""
+    def __init__(self, successor):
+        self.successor = successor
+        super().__init__(successor)
 
 
 def clean_ticker(t):
@@ -363,12 +429,27 @@ def classify_posts(posts):
         log("ERROR: GEMINI_API_KEY missing.")
         return [], ["Gemini key missing — check GitHub Secrets."]
 
+    model = GEMINI_MODEL
+    notes = []
     raw_rows = []
-    for start in range(0, len(posts), BATCH_SIZE):
+    start = 0
+    while start < len(posts):
         batch = posts[start:start + BATCH_SIZE]
-        log(f"Classifying posts {start}–{start + len(batch) - 1} "
-            f"with {GEMINI_MODEL}...")
-        raw_rows.extend(classify_batch(batch, start))
+        log(f"Classifying posts {start}–{start + len(batch) - 1} with {model}...")
+        try:
+            raw_rows.extend(classify_batch(batch, start, model))
+        except ModelRetired as e:
+            if e.successor and e.successor != model:
+                log(f"  model retired; switching to {e.successor} and retrying")
+                notes.append(f"Gemini model {model} is retired — used "
+                             f"{e.successor}. Update GEMINI_MODEL in the workflow.")
+                model = e.successor
+                continue          # retry this same batch with the new model
+            log("  model retired and no successor named; aborting classification.")
+            notes.append(f"Gemini model {model} is retired. Set GEMINI_MODEL "
+                         f"in the workflow to a current model.")
+            break
+        start += BATCH_SIZE
 
     results = []
     for r in raw_rows:
@@ -388,8 +469,7 @@ def classify_posts(posts):
             stance = "neutral"
         p = posts[idx]
         results.append({
-            "ticker": ticker,
-            "stance": stance,
+            "ticker": ticker, "stance": stance,
             "note": str(r.get("note", ""))[:200],
             "author": p.get("author", ""),
             "post_url": p.get("url", ""),
@@ -398,8 +478,7 @@ def classify_posts(posts):
         })
 
     log(f"Extracted {len(results)} ticker mentions.")
-    notes = []
-    if posts and not results:
+    if posts and not results and not notes:
         notes.append("Posts were fetched but contained no stock tickers.")
     return results, notes
 
@@ -427,7 +506,7 @@ def save_history(history):
     tmp = HISTORY_PATH + ".tmp"
     with open(tmp, "w", encoding="utf-8") as f:
         json.dump(history, f, ensure_ascii=False, indent=1)
-    os.replace(tmp, HISTORY_PATH)      # atomic
+    os.replace(tmp, HISTORY_PATH)
 
 
 def dedupe_key(row):
@@ -451,12 +530,14 @@ def merge(history, new_rows):
     return history
 
 
-def write_status(posts_count, added_count, notes):
+def write_status(posts_count, added_count, notes, spend):
     os.makedirs(os.path.dirname(STATUS_PATH), exist_ok=True)
     with open(STATUS_PATH, "w", encoding="utf-8") as f:
         json.dump({"when": datetime.now(timezone.utc).isoformat(),
                    "posts_fetched": posts_count,
                    "mentions_added": added_count,
+                   "spent_total": round(spend.get("total", 0.0), 4),
+                   "budget": BUDGET_USD,
                    "notes": notes}, f, ensure_ascii=False, indent=1)
 
 
@@ -509,7 +590,7 @@ def summarize(history, days):
     return sorted(table.items(), key=lambda kv: (-kv[1]["total"], kv[0]))
 
 
-def build_dashboard(history, notes):
+def build_dashboard(history, notes, spend):
     periods = [("7 days", 7), ("30 days", 30), ("90 days", 90)]
     tabs, tables = [], []
     for i, (label, days) in enumerate(periods):
@@ -545,8 +626,16 @@ def build_dashboard(history, notes):
             f"<p>{esc(r.get('post_text',''))}</p>"
             f"<div class='meta'>{esc(r.get('note',''))}{link}</div></div>")
     feed = "".join(cards) or (
-        "<p class='meta'>Nothing recorded yet. The Actions log prints exactly "
-        "why the last fetch came back empty.</p>")
+        "<p class='meta'>Nothing recorded yet. The Actions log explains why.</p>")
+
+    spent = float(spend.get("total", 0.0))
+    remaining = BUDGET_USD - spent
+    pct = min(max(spent / BUDGET_USD * 100 if BUDGET_USD else 0, 0), 100)
+    bar = (f"<div class='budget'><div class='brow'><span>Apify spend "
+           f"(estimated)</span><span>${spent:.2f} of ${BUDGET_USD:.2f}</span></div>"
+           f"<div class='track'><div class='fill' style='width:{pct:.0f}%'></div></div>"
+           f"<div class='meta'>${remaining:.2f} remaining · verify against "
+           f"console.apify.com → Billing</div></div>")
 
     note_html = ""
     if notes:
@@ -571,6 +660,12 @@ h2 {{ margin-top:34px; font-size:.95rem; color:var(--dim);
 .sub, .meta {{ color:var(--dim); font-size:.8rem; }}
 .sub {{ margin-top:4px; }}
 nav a {{ font-size:.85rem; }}
+.budget {{ background:var(--panel); border:1px solid var(--line);
+  border-radius:10px; padding:12px 14px; margin:16px 0; }}
+.brow {{ display:flex; justify-content:space-between; font-size:.85rem;
+  margin-bottom:8px; }}
+.track {{ height:6px; background:var(--line); border-radius:3px; overflow:hidden; }}
+.fill {{ height:100%; background:var(--warn); }}
 .notice {{ background:rgba(240,180,41,.08); border:1px solid var(--warn);
   border-radius:8px; padding:10px 14px; margin:16px 0; font-size:.85rem; }}
 .notice ul {{ margin:6px 0 0 18px; padding:0; }}
@@ -601,6 +696,7 @@ footer {{ margin-top:38px; color:var(--dim); font-size:.76rem; line-height:1.6; 
 <div class="sub">Watching {watched} · updated {updated} ·
 {len(history)} mentions on file</div></header>
 <nav><a href="analysis.html">Consensus &amp; track record →</a></nav>
+{bar}
 {note_html}
 <div style="margin-top:16px">{''.join(tabs)}</div>
 {''.join(tables)}
@@ -627,10 +723,24 @@ function show(n) {{
 def main():
     log(f"Tracking {len(TARGET_HANDLES)} account(s): "
         f"{', '.join('@' + h for h in TARGET_HANDLES)}")
-    history = load_history()
-    log(f"History on file: {len(history)} mentions\n")
+    log(f"Model    : {GEMINI_MODEL}")
 
-    posts, fetch_notes = fetch_posts()
+    spend = load_spend()
+    history = load_history()
+    log(f"History  : {len(history)} mentions on file")
+
+    posts, fetch_notes, cost = fetch_posts(spend)
+
+    if cost > 0:
+        spend["total"] = float(spend.get("total", 0.0)) + cost
+        spend.setdefault("runs", []).append({
+            "date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+            "tweets": len(posts),
+            "cost": round(cost, 4),
+        })
+        save_spend(spend)
+        log(f"Ledger   : ${spend['total']:.3f} of ${BUDGET_USD:.2f} used")
+
     rows, class_notes = classify_posts(posts)
     before = len(history)
     history = merge(history, rows)
@@ -638,8 +748,8 @@ def main():
 
     save_history(history)
     notes = fetch_notes + class_notes
-    write_status(len(posts), added, notes)
-    build_dashboard(history, notes)
+    write_status(len(posts), added, notes, spend)
+    build_dashboard(history, notes, spend)
     log("Done.")
 
 
@@ -650,4 +760,4 @@ if __name__ == "__main__":
         log(f"UNEXPECTED ERROR: {type(e).__name__}: {e}")
         import traceback
         traceback.print_exc()
-        sys.exit(0)     # never fail the workflow
+        sys.exit(0)
