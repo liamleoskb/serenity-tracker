@@ -2,45 +2,55 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Market Voices Tracker</title><style>
 :root { --bg:#0f1317; --panel:#181f26; --ink:#e9eef3; --dim:#8895a3;
-  --bull:#3ecf8e; --bear:#ff6b6b; --line:#28313b; }
+  --bull:#3ecf8e; --bear:#ff6b6b; --line:#28313b; --warn:#f0b429; }
 * { box-sizing:border-box; }
 body { margin:0; background:var(--bg); color:var(--ink); padding:20px;
-  font:16px/1.55 "Avenir Next","Segoe UI",sans-serif; }
-header { border-left:4px solid var(--bull); padding-left:14px; margin-bottom:22px; }
+  font:16px/1.55 "Avenir Next","Segoe UI",system-ui,sans-serif; }
+header { border-left:4px solid var(--bull); padding-left:14px; margin-bottom:18px; }
 h1 { margin:0; font-size:1.45rem; }
-.sub { color:var(--dim); font-size:.82rem; margin-top:4px; }
+h2 { margin-top:34px; font-size:.95rem; color:var(--dim);
+  text-transform:uppercase; letter-spacing:.08em; }
+.sub, .meta { color:var(--dim); font-size:.8rem; }
+.sub { margin-top:4px; }
 nav a { font-size:.85rem; }
+.notice { background:rgba(240,180,41,.08); border:1px solid var(--warn);
+  border-radius:8px; padding:10px 14px; margin:16px 0; font-size:.85rem; }
+.notice ul { margin:6px 0 0 18px; padding:0; }
 .tab { background:none; border:1px solid var(--line); color:var(--dim);
   padding:8px 16px; border-radius:20px; margin:0 8px 8px 0; font-size:.9rem; }
 .tab.active { color:var(--ink); border-color:var(--bull); }
 table { width:100%; border-collapse:collapse; margin-top:14px; display:none; }
 table.active { display:table; }
-th,td { text-align:left; padding:9px 6px; border-bottom:1px solid var(--line); font-size:.9rem; }
-th { color:var(--dim); font-size:.72rem; text-transform:uppercase; letter-spacing:.06em; }
+th,td { text-align:left; padding:9px 6px; border-bottom:1px solid var(--line);
+  font-size:.9rem; }
+th { color:var(--dim); font-size:.72rem; text-transform:uppercase;
+  letter-spacing:.06em; }
 .tk { font-weight:700; }
 .who { color:var(--dim); font-size:.8rem; margin-left:8px; }
-.bullish { color:var(--bull); } .bearish { color:var(--bear); } .neutral { color:var(--dim); }
-h2 { margin-top:34px; font-size:.95rem; color:var(--dim);
-  text-transform:uppercase; letter-spacing:.08em; }
+.bullish { color:var(--bull); } .bearish { color:var(--bear); }
+.neutral { color:var(--dim); }
 .card { background:var(--panel); border:1px solid var(--line); border-radius:10px;
   padding:13px 15px; margin-top:11px; }
-.card-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
-.badge { font-size:.72rem; padding:2px 10px; border-radius:12px; border:1px solid currentColor; }
+.card-top { display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:6px; gap:10px; }
+.badge { font-size:.72rem; padding:2px 10px; border-radius:12px;
+  border:1px solid currentColor; white-space:nowrap; }
 .card p { margin:4px 0; font-size:.9rem; }
-.meta { color:var(--dim); font-size:.78rem; }
 a { color:var(--bull); }
 footer { margin-top:38px; color:var(--dim); font-size:.76rem; line-height:1.6; }
 </style></head><body>
 <header><h1>Market Voices Tracker</h1>
-<div class="sub">Watching @aleabitoreddit, @gmpnavi, @NURadu_, @TheObserverLee, @Alisvolatprop12 · updated 2026-08-25 23:44 UTC</div></header>
+<div class="sub">Watching @aleabitoreddit, @gmpnavi, @NURadu_, @TheObserverLee, @Alisvolatprop12 · updated 2026-08-26 02:53 UTC ·
+0 mentions on file</div></header>
 <nav><a href="analysis.html">Consensus &amp; track record →</a></nav>
+<div class='notice'><strong>Last run</strong><ul><li>Fetched 100 posts · est. ~$0.306</li><li>Posts were fetched but contained no stock tickers.</li></ul></div>
 <div style="margin-top:16px"><button class='tab active' onclick='show(0)'>7 days</button><button class='tab ' onclick='show(1)'>30 days</button><button class='tab ' onclick='show(2)'>90 days</button></div>
 <table class='period active'><thead><tr><th>Ticker</th><th>Mentions</th><th>Voices</th><th>Bull</th><th>Bear</th><th>Neutral</th><th>Latest</th></tr></thead><tbody><tr><td colspan='7'>No mentions in this period yet.</td></tr></tbody></table><table class='period '><thead><tr><th>Ticker</th><th>Mentions</th><th>Voices</th><th>Bull</th><th>Bear</th><th>Neutral</th><th>Latest</th></tr></thead><tbody><tr><td colspan='7'>No mentions in this period yet.</td></tr></tbody></table><table class='period '><thead><tr><th>Ticker</th><th>Mentions</th><th>Voices</th><th>Bull</th><th>Bear</th><th>Neutral</th><th>Latest</th></tr></thead><tbody><tr><td colspan='7'>No mentions in this period yet.</td></tr></tbody></table>
 <h2>Recent mentions</h2>
-<p>Nothing recorded yet — check the Actions log for what the fetch returned.</p>
-<footer>Automated research interface for public posts. Not affiliated with any tracked
-account. Classifications are AI-generated and may be wrong — always read the original
-post. Not investment advice.</footer>
+<p class='meta'>Nothing recorded yet. The Actions log prints exactly why the last fetch came back empty.</p>
+<footer>Automated research interface for public posts. Not affiliated with any
+tracked account. Classifications are AI-generated and often wrong — always read
+the original post before relying on anything here. Not investment advice.</footer>
 <script>
 function show(n) {
   document.querySelectorAll('.period').forEach((t,i)=>t.classList.toggle('active',i===n));
