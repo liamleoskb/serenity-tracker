@@ -1,11 +1,10 @@
 name: Daily Market Voices Tracker
 
-# The tracker now makes ONE Apify run per execution covering all accounts
-# (max_items is global per run, per the actor's documentation), so the free
-# plan's 10-runs-per-day limit is no longer a constraint.
-#
-# Schedule stays commented out until one manual run returns real posts.
+# One Apify run per day, budget-guarded. The script refuses to fetch if the
+# remaining budget could not absorb a worst-case run, and refuses a second
+# run on the same UTC date, so overspending is structurally impossible.
 on:
+  # Uncomment after one manual run succeeds:
   # schedule:
   #   - cron: "30 22 * * *"    # 22:30 UTC = 07:30 KST
   workflow_dispatch: {}
@@ -13,7 +12,7 @@ on:
 permissions:
   contents: write
 
-concurrency:                     # never let two runs overlap
+concurrency:
   group: tracker
   cancel-in-progress: false
 
@@ -37,11 +36,14 @@ jobs:
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
           APIFY_ACTOR_ID: ${{ secrets.APIFY_ACTOR_ID }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          TARGET_HANDLES: aleabitoreddit,gmpnavi,NURadu_,TheObserverLee,Alisvolatprop12
+          TARGET_HANDLES: aleabitoreddit,NURadu_,Alisvolatprop12
+          GEMINI_MODEL: "gemini-3.6-flash"
           MAX_ITEMS: "100"        # documented minimum run size
-          LOOKBACK_DAYS: "2"      # 1 day of overlap; higher may re-bill tweets
-          SEARCH_SORT: "Latest"   # newest first; "Top" returns more but unordered
-          TWEET_TYPE: "exclude_retweets"   # retweets would misattribute authorship
+          LOOKBACK_DAYS: "1"      # smallest window = lowest cost
+          SEARCH_SORT: "Latest"
+          TWEET_TYPE: "exclude_retweets"
+          BUDGET_USD: "1.70"      # raise this after your Apify credit resets
+          # FORCE_RUN: "1"        # uncomment only to override the same-day guard
         run: python serenity_tracker.py
 
       - name: Run the analysis
