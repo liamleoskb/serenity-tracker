@@ -538,5 +538,535 @@
   "post_date": "Thu Aug 27 11:10:59 +0000 2026",
   "post_text": "메타 원화채!",
   "recorded_at": "2026-08-28T05:56:26.585062+00:00"
+ },
+ {
+  "ticker": "EROC",
+  "stance": "bullish",
+  "note": "Solid fundamentals with essential power demand for datacenters",
+  "author": "NURadu_",
+  "post_url": "https://x.com/NURadu_/status/2094649547775783065",
+  "post_date": "Tue Sep 01 04:52:23 +0000 2026",
+  "post_text": "$EROC \n갭 거의다 채웠고 \n11-12$ 지지테스트 와 변동 체크\n펀더멘탈은 문제가 없다\n매크로가 문제지 \n결국 미국은 어느방향이던, 데센 을 허락할 것이고 \n전력은 필수다 https://t.co/u8S1GD57bq",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "JOBY",
+  "stance": "bearish",
+  "note": "Price fell significantly and author explicitly refuses to buy",
+  "author": "NURadu_",
+  "post_url": "https://x.com/NURadu_/status/2094648442794704915",
+  "post_date": "Tue Sep 01 04:48:00 +0000 2026",
+  "post_text": "$JOBY 와 얘도 안본사이에 엄청 떨어졌네,\n근데 안살랭... 헤헤 https://t.co/hd1ZKuF5XC",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "NVDA",
+  "stance": "bullish",
+  "note": "High growth rate at 70% and acts like a semiconductor ETF",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094589312016994565",
+  "post_date": "Tue Sep 01 00:53:02 +0000 2026",
+  "post_text": "@lijiu163076 $NVDA is growing at a capacity constrained 70% next year, which is ridiculously good.   \n\nMy opinion is that it's hard to go wrong with Nvidia, because it's almost like a semiconductor ETF? They own decent parts of $INTC, $MRVL, $LITE, $COHR, $NBIS, and Mediatek now.",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "INTC",
+  "stance": "neutral",
+  "note": "Described as part of NVDA's ecosystem investments",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094589312016994565",
+  "post_date": "Tue Sep 01 00:53:02 +0000 2026",
+  "post_text": "@lijiu163076 $NVDA is growing at a capacity constrained 70% next year, which is ridiculously good.   \n\nMy opinion is that it's hard to go wrong with Nvidia, because it's almost like a semiconductor ETF? They own decent parts of $INTC, $MRVL, $LITE, $COHR, $NBIS, and Mediatek now.",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "MRVL",
+  "stance": "neutral",
+  "note": "Described as part of NVDA's ecosystem investments",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094589312016994565",
+  "post_date": "Tue Sep 01 00:53:02 +0000 2026",
+  "post_text": "@lijiu163076 $NVDA is growing at a capacity constrained 70% next year, which is ridiculously good.   \n\nMy opinion is that it's hard to go wrong with Nvidia, because it's almost like a semiconductor ETF? They own decent parts of $INTC, $MRVL, $LITE, $COHR, $NBIS, and Mediatek now.",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "LITE",
+  "stance": "neutral",
+  "note": "Described as part of NVDA's ecosystem investments",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094589312016994565",
+  "post_date": "Tue Sep 01 00:53:02 +0000 2026",
+  "post_text": "@lijiu163076 $NVDA is growing at a capacity constrained 70% next year, which is ridiculously good.   \n\nMy opinion is that it's hard to go wrong with Nvidia, because it's almost like a semiconductor ETF? They own decent parts of $INTC, $MRVL, $LITE, $COHR, $NBIS, and Mediatek now.",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "COHR",
+  "stance": "neutral",
+  "note": "Described as part of NVDA's ecosystem investments",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094589312016994565",
+  "post_date": "Tue Sep 01 00:53:02 +0000 2026",
+  "post_text": "@lijiu163076 $NVDA is growing at a capacity constrained 70% next year, which is ridiculously good.   \n\nMy opinion is that it's hard to go wrong with Nvidia, because it's almost like a semiconductor ETF? They own decent parts of $INTC, $MRVL, $LITE, $COHR, $NBIS, and Mediatek now.",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "NBIS",
+  "stance": "neutral",
+  "note": "Described as part of NVDA's ecosystem investments",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094589312016994565",
+  "post_date": "Tue Sep 01 00:53:02 +0000 2026",
+  "post_text": "@lijiu163076 $NVDA is growing at a capacity constrained 70% next year, which is ridiculously good.   \n\nMy opinion is that it's hard to go wrong with Nvidia, because it's almost like a semiconductor ETF? They own decent parts of $INTC, $MRVL, $LITE, $COHR, $NBIS, and Mediatek now.",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "2454.TW",
+  "stance": "neutral",
+  "note": "Described as part of NVDA's ecosystem investments",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094589312016994565",
+  "post_date": "Tue Sep 01 00:53:02 +0000 2026",
+  "post_text": "@lijiu163076 $NVDA is growing at a capacity constrained 70% next year, which is ridiculously good.   \n\nMy opinion is that it's hard to go wrong with Nvidia, because it's almost like a semiconductor ETF? They own decent parts of $INTC, $MRVL, $LITE, $COHR, $NBIS, and Mediatek now.",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "IREN",
+  "stance": "bullish",
+  "note": "Owns shares and anticipates potential compute deal with Anthropic",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094587473657811264",
+  "post_date": "Tue Sep 01 00:45:43 +0000 2026",
+  "post_text": "I mean I do have 1 single share of $IREN now, so I'd love to see them get a deal with Anthropic.\n\nThere were leaked memos suggesting that Anthropic was looking to secure more in Australia, and that just so happens to be the country Iren was heavily investing in.\n\nBuuut, the $25-3",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "NVDA",
+  "stance": "neutral",
+  "note": "Mentioned as backer of Lambda in news context",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094585395224981709",
+  "post_date": "Tue Sep 01 00:37:28 +0000 2026",
+  "post_text": "Anthropic signs a $35B AI compute deal with $NVDA backed Lambda.\n\n$HUT / DC, with Lambda / GPUs. \n\nFrontier model demand is rapidly outpacing the ecosystem's ability to build capacity.\n\nIt also looks like Anthropic is securing more compute... Which neocloud/colo player is next? h",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "HUT",
+  "stance": "bullish",
+  "note": "Highlighted as a key player benefiting from AI compute demand",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094585395224981709",
+  "post_date": "Tue Sep 01 00:37:28 +0000 2026",
+  "post_text": "Anthropic signs a $35B AI compute deal with $NVDA backed Lambda.\n\n$HUT / DC, with Lambda / GPUs. \n\nFrontier model demand is rapidly outpacing the ecosystem's ability to build capacity.\n\nIt also looks like Anthropic is securing more compute... Which neocloud/colo player is next? h",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "NVDA",
+  "stance": "neutral",
+  "note": "Describing news report about Anthropic and Nvidia",
+  "author": "Alisvolatprop12",
+  "post_url": "https://x.com/Alisvolatprop12/status/2094576043671904568",
+  "post_date": "Tue Sep 01 00:00:18 +0000 2026",
+  "post_text": "앤트로픽이 다시 엔비디아의 품으로…",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "108490.KQ",
+  "stance": "neutral",
+  "note": "Stating production capacity and output statistics",
+  "author": "Alisvolatprop12",
+  "post_url": "https://x.com/Alisvolatprop12/status/2094572752388899077",
+  "post_date": "Mon Aug 31 23:47:14 +0000 2026",
+  "post_text": "@joejo2038 작년 로보티즈 액츄에이터 생산 캐파가 30만대, 올해 상반기 출하량이 23만대 정도 됩니다. 다음달 완공되는 우즈벡 공장이 빨리 올라와야…",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "SNDK",
+  "stance": "neutral",
+  "note": "Observing vertical price movement at market close",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094520530842026088",
+  "post_date": "Mon Aug 31 20:19:43 +0000 2026",
+  "post_text": "@mykwantitative Yep, probably that as well in a similar window. Seeing $SNDK go vertical at close was interesting",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "QQQ",
+  "stance": "neutral",
+  "note": "Describing price spike following Trump's rate hike comments",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094516012557427002",
+  "post_date": "Mon Aug 31 20:01:46 +0000 2026",
+  "post_text": "Interesting to see $QQQ spike when Trump gave a comment on potential rate hikes:\n\nAnswer: \"Trump: No, I have a lot of respect for him, and he'll do what he has to do.\n\nI think our interest rates are too high.\" https://t.co/vKwUWbUfHx",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "SNDK",
+  "stance": "bearish",
+  "note": "Expressing frustration over extreme volatility and calling it a trash stock",
+  "author": "NURadu_",
+  "post_url": "https://x.com/NURadu_/status/2094515160748859581",
+  "post_date": "Mon Aug 31 19:58:23 +0000 2026",
+  "post_text": "$SNDK 롱 숏 다죽이고 \n월말 리밸런싱 들어가나요? 미친잡주 진짜 ㅋㅋ https://t.co/qufiry8deG",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "BRUN",
+  "stance": "bearish",
+  "note": "Frustrated with underperformance relative to the broader market",
+  "author": "NURadu_",
+  "post_url": "https://x.com/NURadu_/status/2094507246487232827",
+  "post_date": "Mon Aug 31 19:26:56 +0000 2026",
+  "post_text": "$BRUN 이락이도 델고가라 상넘아 https://t.co/vawkRrufsk",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "3665.TW",
+  "stance": "bullish",
+  "note": "Averaged down during drawdown and position is currently up 55%",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094495687899848818",
+  "post_date": "Mon Aug 31 18:41:00 +0000 2026",
+  "post_text": "Yeah, I think a lot of the valuation reset has already happened.\n\nI'm sure for most ppl, seeing a drawdown without much conviction is daunting.\n\nBut periods of fear/forced selling are typically the best opportunities as well (eg. I avged down on Foci after drop, and now my curren",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "NBIS",
+  "stance": "bullish",
+  "note": "Cites massive demand imbalance for compute",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094492628758999451",
+  "post_date": "Mon Aug 31 18:28:51 +0000 2026",
+  "post_text": "Macro has clearly cut high beta AI valuations over the past few months. But I try to stay focused on fundamentals.\n\nIf you're curious about my take though:\n\nWe're seeing record visibility with\n- memory (2031), photonics (2029-2030), etc LTAs\n-  $NBIS, solana:5aQcoaSyy7fnhvpRHasBU",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "NVDA",
+  "stance": "bullish",
+  "note": "Highlights record 70% growth projection for 2027",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094492628758999451",
+  "post_date": "Mon Aug 31 18:28:51 +0000 2026",
+  "post_text": "Macro has clearly cut high beta AI valuations over the past few months. But I try to stay focused on fundamentals.\n\nIf you're curious about my take though:\n\nWe're seeing record visibility with\n- memory (2031), photonics (2029-2030), etc LTAs\n-  $NBIS, solana:5aQcoaSyy7fnhvpRHasBU",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "SMCI",
+  "stance": "bullish",
+  "note": "Highlights $60B+ in new server orders",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094492628758999451",
+  "post_date": "Mon Aug 31 18:28:51 +0000 2026",
+  "post_text": "Macro has clearly cut high beta AI valuations over the past few months. But I try to stay focused on fundamentals.\n\nIf you're curious about my take though:\n\nWe're seeing record visibility with\n- memory (2031), photonics (2029-2030), etc LTAs\n-  $NBIS, solana:5aQcoaSyy7fnhvpRHasBU",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "108230.KQ",
+  "stance": "neutral",
+  "note": "describing statement from Pollen Robotics co-founder regarding Robotis actuators",
+  "author": "Alisvolatprop12",
+  "post_url": "https://x.com/Alisvolatprop12/status/2094468495371346093",
+  "post_date": "Mon Aug 31 16:52:57 +0000 2026",
+  "post_text": "화제의 microduck의 액츄에이터로는 한국의 로보티즈(@Robotis) XL330 액츄에이터가 쓰였다고 제작사인 Pollen Robotics의 Mattiey Lapeyre 공동창업자가 직접 밝혔습니다. https://t.co/cfZXocxbqV",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "BRUN",
+  "stance": "neutral",
+  "note": "summarizing 13F institutional filings",
+  "author": "NURadu_",
+  "post_url": "https://x.com/NURadu_/status/2094455826392260750",
+  "post_date": "Mon Aug 31 16:02:36 +0000 2026",
+  "post_text": "[2026년 2분기 13F 부스트런 $BRUN 기관 수급 총정리]\n\n상장 이후 사실상 첫 성적표인 이번 2분기 13F 공시에서 월가 기관들의 초기 물량 선점 경쟁이 확인됐음. \n\n13F 공시 기반 핵심 수급 내역 정리임.\n\n주요 기관 및 헤지펀드 \n\nTOMS 캐피탈: 390만 주 매수. 전체 지분의 약 4.9%를 확보하며 단숨에 최상위권 주요 주주로 등극했음.\n\n피델리티: 178만 주 매수. 지분 2.2%를 쓸어 담으며 포트폴리오에 전격 편입했음.\n\nAWM 인베스트먼트: 81만 3천 주 신규 진입",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "NVDA",
+  "stance": "neutral",
+  "note": "describing cloud partnership with Nvidia",
+  "author": "NURadu_",
+  "post_url": "https://x.com/NURadu_/status/2094455826392260750",
+  "post_date": "Mon Aug 31 16:02:36 +0000 2026",
+  "post_text": "[2026년 2분기 13F 부스트런 $BRUN 기관 수급 총정리]\n\n상장 이후 사실상 첫 성적표인 이번 2분기 13F 공시에서 월가 기관들의 초기 물량 선점 경쟁이 확인됐음. \n\n13F 공시 기반 핵심 수급 내역 정리임.\n\n주요 기관 및 헤지펀드 \n\nTOMS 캐피탈: 390만 주 매수. 전체 지분의 약 4.9%를 확보하며 단숨에 최상위권 주요 주주로 등극했음.\n\n피델리티: 178만 주 매수. 지분 2.2%를 쓸어 담으며 포트폴리오에 전격 편입했음.\n\nAWM 인베스트먼트: 81만 3천 주 신규 진입",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "RIOT",
+  "stance": "neutral",
+  "note": "summarizing 13F institutional filings",
+  "author": "NURadu_",
+  "post_url": "https://x.com/NURadu_/status/2094455216926294464",
+  "post_date": "Mon Aug 31 16:00:11 +0000 2026",
+  "post_text": "[2026년 2분기 13F  라이엇 플랫폼즈($RIOT ) 기관 수급 총정리]\n\n단순 암호화폐 채굴주에서 AI 데이터센터 인프라 기업으로 내러티브가 전환되면서 월가 스마트머니가 대거 유입됐음. \n\n13F 공시 기반 변동 내역 팩트만 요약해 드림.\n\n■ 기존 메이저 운용사 (비중 확대)\n\n블랙록: 3,200만 주 (230만 주 추가 매수). 여전히 굳건한 최대 주주급임.\n\n뱅가드: 2,170만 주 (3.9만 주 추가 매수). 물량 그대로 쥐고 있음.\n\n피델리티(FMR): 1,960만 주 (460만 ",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "LLY",
+  "stance": "neutral",
+  "note": "reporting acquisition news by Eli Lilly",
+  "author": "NURadu_",
+  "post_url": "https://x.com/NURadu_/status/2094433565350265242",
+  "post_date": "Mon Aug 31 14:34:09 +0000 2026",
+  "post_text": "Eli Lilly, 자가면역·알레르기 질환 치료제 파이프라인 강화를 위해 비상장 바이오기업 Merida Biosciences를 최대 28.8억달러에 현금 인수 결정. 4분기에 거래 마무리 예정\n\n비만·당뇨 치료제의 성공으로 확보한 자금력을 바탕으로 인수합병 확대 지속. 올해 인수 관련 지출은 과거 연간 지출 규모를 상회하며, 비만·당뇨 외 치료 영역으로 성장동력 다변화 추진\n\nMerida는 자가면역질환을 유발하는 특정 항체를 선택적으로 표적하는 치료제 개발 기업. 핵심 후보물질 MER511은 그레",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "AMGN",
+  "stance": "neutral",
+  "note": "mentioning Amgen in market overview",
+  "author": "NURadu_",
+  "post_url": "https://x.com/NURadu_/status/2094433565350265242",
+  "post_date": "Mon Aug 31 14:34:09 +0000 2026",
+  "post_text": "Eli Lilly, 자가면역·알레르기 질환 치료제 파이프라인 강화를 위해 비상장 바이오기업 Merida Biosciences를 최대 28.8억달러에 현금 인수 결정. 4분기에 거래 마무리 예정\n\n비만·당뇨 치료제의 성공으로 확보한 자금력을 바탕으로 인수합병 확대 지속. 올해 인수 관련 지출은 과거 연간 지출 규모를 상회하며, 비만·당뇨 외 치료 영역으로 성장동력 다변화 추진\n\nMerida는 자가면역질환을 유발하는 특정 항체를 선택적으로 표적하는 치료제 개발 기업. 핵심 후보물질 MER511은 그레",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "VRDN",
+  "stance": "neutral",
+  "note": "mentioning Viridian Therapeutics in market overview",
+  "author": "NURadu_",
+  "post_url": "https://x.com/NURadu_/status/2094433565350265242",
+  "post_date": "Mon Aug 31 14:34:09 +0000 2026",
+  "post_text": "Eli Lilly, 자가면역·알레르기 질환 치료제 파이프라인 강화를 위해 비상장 바이오기업 Merida Biosciences를 최대 28.8억달러에 현금 인수 결정. 4분기에 거래 마무리 예정\n\n비만·당뇨 치료제의 성공으로 확보한 자금력을 바탕으로 인수합병 확대 지속. 올해 인수 관련 지출은 과거 연간 지출 규모를 상회하며, 비만·당뇨 외 치료 영역으로 성장동력 다변화 추진\n\nMerida는 자가면역질환을 유발하는 특정 항체를 선택적으로 표적하는 치료제 개발 기업. 핵심 후보물질 MER511은 그레",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "BRUN",
+  "stance": "bullish",
+  "note": "author plans to buy more shares on price dips",
+  "author": "NURadu_",
+  "post_url": "https://x.com/NURadu_/status/2094430943457230965",
+  "post_date": "Mon Aug 31 14:23:44 +0000 2026",
+  "post_text": "$BRUN 요새낀 찐막 물타기,\n15$하단 터치하면 오면 더 타줄예정 손절은 14$에서 컷라인 오지마라 오지마라 오지마라 https://t.co/fWg5MEDk7D",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "NVDA",
+  "stance": "neutral",
+  "note": "stating fact about Nvidia museum",
+  "author": "Alisvolatprop12",
+  "post_url": "https://x.com/Alisvolatprop12/status/2094428996087980544",
+  "post_date": "Mon Aug 31 14:15:59 +0000 2026",
+  "post_text": "@scruba9876 @minzgames 엔비디아는 공식 뮤지엄이 없습니다...",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "UUUU",
+  "stance": "bullish",
+  "note": "author buying and planning to buy more",
+  "author": "NURadu_",
+  "post_url": "https://x.com/NURadu_/status/2094426730387906867",
+  "post_date": "Mon Aug 31 14:06:59 +0000 2026",
+  "post_text": "츄츄츄매 \n현금 거의소진 \n아직 빨간불인애들이 더 많아서 다행이다 \n수틀리면 익절치고 얘네 추매예정 \n$UUUU $BRUN $EROC $RDW \n매크로는 흘러가는것.. https://t.co/pWyqeirbAx",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "BRUN",
+  "stance": "bullish",
+  "note": "author buying and planning to buy more",
+  "author": "NURadu_",
+  "post_url": "https://x.com/NURadu_/status/2094426730387906867",
+  "post_date": "Mon Aug 31 14:06:59 +0000 2026",
+  "post_text": "츄츄츄매 \n현금 거의소진 \n아직 빨간불인애들이 더 많아서 다행이다 \n수틀리면 익절치고 얘네 추매예정 \n$UUUU $BRUN $EROC $RDW \n매크로는 흘러가는것.. https://t.co/pWyqeirbAx",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "EROC",
+  "stance": "bullish",
+  "note": "author buying and planning to buy more",
+  "author": "NURadu_",
+  "post_url": "https://x.com/NURadu_/status/2094426730387906867",
+  "post_date": "Mon Aug 31 14:06:59 +0000 2026",
+  "post_text": "츄츄츄매 \n현금 거의소진 \n아직 빨간불인애들이 더 많아서 다행이다 \n수틀리면 익절치고 얘네 추매예정 \n$UUUU $BRUN $EROC $RDW \n매크로는 흘러가는것.. https://t.co/pWyqeirbAx",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "RDW",
+  "stance": "bullish",
+  "note": "author buying and planning to buy more",
+  "author": "NURadu_",
+  "post_url": "https://x.com/NURadu_/status/2094426730387906867",
+  "post_date": "Mon Aug 31 14:06:59 +0000 2026",
+  "post_text": "츄츄츄매 \n현금 거의소진 \n아직 빨간불인애들이 더 많아서 다행이다 \n수틀리면 익절치고 얘네 추매예정 \n$UUUU $BRUN $EROC $RDW \n매크로는 흘러가는것.. https://t.co/pWyqeirbAx",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "NVDA",
+  "stance": "bullish",
+  "note": "Cements strategic position in AI and ASIC ecosystem",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094416430032896428",
+  "post_date": "Mon Aug 31 13:26:03 +0000 2026",
+  "post_text": "Yep, with $NVDA investing $3.5B into Mediatek.\n\nIt does feel like Nvidia is playing kingmaker with the next generation of ASIC winners like $MRVL / Mediatek, with a second order effect of eroding $AVGO position.\n\nPlaybook feels similar to what they did with Neoclouds like $NBIS a",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "2454.TW",
+  "stance": "bullish",
+  "note": "Receives $3.5B investment as next gen ASIC winner",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094416430032896428",
+  "post_date": "Mon Aug 31 13:26:03 +0000 2026",
+  "post_text": "Yep, with $NVDA investing $3.5B into Mediatek.\n\nIt does feel like Nvidia is playing kingmaker with the next generation of ASIC winners like $MRVL / Mediatek, with a second order effect of eroding $AVGO position.\n\nPlaybook feels similar to what they did with Neoclouds like $NBIS a",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "MRVL",
+  "stance": "bullish",
+  "note": "Highlighted as next generation ASIC winner",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094416430032896428",
+  "post_date": "Mon Aug 31 13:26:03 +0000 2026",
+  "post_text": "Yep, with $NVDA investing $3.5B into Mediatek.\n\nIt does feel like Nvidia is playing kingmaker with the next generation of ASIC winners like $MRVL / Mediatek, with a second order effect of eroding $AVGO position.\n\nPlaybook feels similar to what they did with Neoclouds like $NBIS a",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "AVGO",
+  "stance": "bearish",
+  "note": "Eroding market position",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094416430032896428",
+  "post_date": "Mon Aug 31 13:26:03 +0000 2026",
+  "post_text": "Yep, with $NVDA investing $3.5B into Mediatek.\n\nIt does feel like Nvidia is playing kingmaker with the next generation of ASIC winners like $MRVL / Mediatek, with a second order effect of eroding $AVGO position.\n\nPlaybook feels similar to what they did with Neoclouds like $NBIS a",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "NBIS",
+  "stance": "neutral",
+  "note": "Mentioned as historical playbook comparison",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094416430032896428",
+  "post_date": "Mon Aug 31 13:26:03 +0000 2026",
+  "post_text": "Yep, with $NVDA investing $3.5B into Mediatek.\n\nIt does feel like Nvidia is playing kingmaker with the next generation of ASIC winners like $MRVL / Mediatek, with a second order effect of eroding $AVGO position.\n\nPlaybook feels similar to what they did with Neoclouds like $NBIS a",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "CRWV",
+  "stance": "neutral",
+  "note": "Mentioned as historical playbook comparison",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094416430032896428",
+  "post_date": "Mon Aug 31 13:26:03 +0000 2026",
+  "post_text": "Yep, with $NVDA investing $3.5B into Mediatek.\n\nIt does feel like Nvidia is playing kingmaker with the next generation of ASIC winners like $MRVL / Mediatek, with a second order effect of eroding $AVGO position.\n\nPlaybook feels similar to what they did with Neoclouds like $NBIS a",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "AMD",
+  "stance": "neutral",
+  "note": "Mentioned in context of potential market realignment",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094416430032896428",
+  "post_date": "Mon Aug 31 13:26:03 +0000 2026",
+  "post_text": "Yep, with $NVDA investing $3.5B into Mediatek.\n\nIt does feel like Nvidia is playing kingmaker with the next generation of ASIC winners like $MRVL / Mediatek, with a second order effect of eroding $AVGO position.\n\nPlaybook feels similar to what they did with Neoclouds like $NBIS a",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "MRVL",
+  "stance": "bullish",
+  "note": "Benefiting from growing ASIC market pie",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094408196769423727",
+  "post_date": "Mon Aug 31 12:53:20 +0000 2026",
+  "post_text": "@balllvest With how the trends are going with $MRVL and Mediatek. My guess is Alchip (disclosure, I own this) or $QCOM might be next. \n\nI think the ASIC pie gets bigger for all of them though.",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "2454.TW",
+  "stance": "bullish",
+  "note": "Benefiting from positive trends and growing ASIC pie",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094408196769423727",
+  "post_date": "Mon Aug 31 12:53:20 +0000 2026",
+  "post_text": "@balllvest With how the trends are going with $MRVL and Mediatek. My guess is Alchip (disclosure, I own this) or $QCOM might be next. \n\nI think the ASIC pie gets bigger for all of them though.",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "3661.TW",
+  "stance": "bullish",
+  "note": "Predicted to benefit next in ASIC expansion",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094408196769423727",
+  "post_date": "Mon Aug 31 12:53:20 +0000 2026",
+  "post_text": "@balllvest With how the trends are going with $MRVL and Mediatek. My guess is Alchip (disclosure, I own this) or $QCOM might be next. \n\nI think the ASIC pie gets bigger for all of them though.",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "QCOM",
+  "stance": "bullish",
+  "note": "Predicted as potential next beneficiary",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094408196769423727",
+  "post_date": "Mon Aug 31 12:53:20 +0000 2026",
+  "post_text": "@balllvest With how the trends are going with $MRVL and Mediatek. My guess is Alchip (disclosure, I own this) or $QCOM might be next. \n\nI think the ASIC pie gets bigger for all of them though.",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "2454.TW",
+  "stance": "neutral",
+  "note": "Describing CPO partnership from public filings",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094407457913401454",
+  "post_date": "Mon Aug 31 12:50:24 +0000 2026",
+  "post_text": "@Matrix_B0SS I actually learned today that Mediatek is partners with Ayar for CPO (not just investors) from public filings. \n\nAnd of course it's known that $SIVE is the primary laser supplier to Ayar. But Sivers is probably too far upstream for now. https://t.co/gs8e1z2rf1",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "SIVE.ST",
+  "stance": "neutral",
+  "note": "Describing supply chain position",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094407457913401454",
+  "post_date": "Mon Aug 31 12:50:24 +0000 2026",
+  "post_text": "@Matrix_B0SS I actually learned today that Mediatek is partners with Ayar for CPO (not just investors) from public filings. \n\nAnd of course it's known that $SIVE is the primary laser supplier to Ayar. But Sivers is probably too far upstream for now. https://t.co/gs8e1z2rf1",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "NVDA",
+  "stance": "bullish",
+  "note": "Networking into ASIC ecosystem and setting standards",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094405648293482965",
+  "post_date": "Mon Aug 31 12:43:13 +0000 2026",
+  "post_text": "Today, $NVDA has announced a $3.5B investment into Mediatek. \n\nIt appears Nvidia is \"networking\" itself into the broader ASIC ecosystem, from $MRVL to MediaTek.\n\nAnd have future ecosystems aligned with Nvidia standards. (maybe to fend off $AVGO as well) https://t.co/okdGKS51U3",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "2454.TW",
+  "stance": "bullish",
+  "note": "Receiving $3.5B investment into ASIC ecosystem",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094405648293482965",
+  "post_date": "Mon Aug 31 12:43:13 +0000 2026",
+  "post_text": "Today, $NVDA has announced a $3.5B investment into Mediatek. \n\nIt appears Nvidia is \"networking\" itself into the broader ASIC ecosystem, from $MRVL to MediaTek.\n\nAnd have future ecosystems aligned with Nvidia standards. (maybe to fend off $AVGO as well) https://t.co/okdGKS51U3",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "MRVL",
+  "stance": "neutral",
+  "note": "Described as part of broader ASIC ecosystem",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094405648293482965",
+  "post_date": "Mon Aug 31 12:43:13 +0000 2026",
+  "post_text": "Today, $NVDA has announced a $3.5B investment into Mediatek. \n\nIt appears Nvidia is \"networking\" itself into the broader ASIC ecosystem, from $MRVL to MediaTek.\n\nAnd have future ecosystems aligned with Nvidia standards. (maybe to fend off $AVGO as well) https://t.co/okdGKS51U3",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "AVGO",
+  "stance": "bearish",
+  "note": "Targeted by Nvidia strategic alignment",
+  "author": "aleabitoreddit",
+  "post_url": "https://x.com/aleabitoreddit/status/2094405648293482965",
+  "post_date": "Mon Aug 31 12:43:13 +0000 2026",
+  "post_text": "Today, $NVDA has announced a $3.5B investment into Mediatek. \n\nIt appears Nvidia is \"networking\" itself into the broader ASIC ecosystem, from $MRVL to MediaTek.\n\nAnd have future ecosystems aligned with Nvidia standards. (maybe to fend off $AVGO as well) https://t.co/okdGKS51U3",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
+ },
+ {
+  "ticker": "INTC",
+  "stance": "neutral",
+  "note": "Mentions visiting Intel last year",
+  "author": "Alisvolatprop12",
+  "post_url": "https://x.com/Alisvolatprop12/status/2094404910414741879",
+  "post_date": "Mon Aug 31 12:40:17 +0000 2026",
+  "post_text": "@minzgames 인텔은 작년에 다녀왔습니다 ㅎㅎ https://t.co/mxWX8hNHOd",
+  "recorded_at": "2026-09-01T06:23:05.800994+00:00"
  }
 ]

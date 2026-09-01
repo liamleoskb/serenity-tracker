@@ -1,11 +1,10 @@
 {
- "when": "2026-08-28T05:56:26.586197+00:00",
+ "when": "2026-09-01T06:23:05.802538+00:00",
  "posts_fetched": 100,
- "mentions_added": 31,
- "spent_total": 0.612,
+ "mentions_added": 53,
+ "spent_total": 0.918,
  "budget": 1.7,
  "notes": [
-  "Fetched 100 posts · est. $0.306",
-  "Cap reached and @NURadu_ used 62/100 of it — other accounts under-sampled."
+  "Fetched 100 posts · est. $0.306"
  ]
 }
